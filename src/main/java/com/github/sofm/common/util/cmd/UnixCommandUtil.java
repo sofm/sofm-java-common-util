@@ -1,16 +1,17 @@
 package com.github.sofm.common.util.cmd;
 
-import com.github.sofm.common.util.ExceptionUtil;
+import com.github.sofm.common.util.core.ExceptionUtil;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@NoArgsConstructor
 @Slf4j
 public class UnixCommandUtil {
+
+  private UnixCommandUtil() {
+  }
 
   public static CommandResult createScript(String scriptPath, String content) {
     try (Writer output = new BufferedWriter(new FileWriter(scriptPath))) {

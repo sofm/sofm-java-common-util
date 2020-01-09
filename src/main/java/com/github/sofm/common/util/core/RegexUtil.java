@@ -1,13 +1,15 @@
-package com.github.sofm.common.util;
+package com.github.sofm.common.util.core;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@NoArgsConstructor
 @Slf4j
 public class RegexUtil {
+
+  private RegexUtil(){
+  }
 
   private static final Pattern DEFAULT_VALID_EMAIL_ADDRESS_REGEX =
       Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);

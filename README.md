@@ -21,7 +21,7 @@ Here you can download and install the java codestyle: [https://github.com/google
     <dependency>
       <groupId>com.github.sofm</groupId>
       <artifactId>sofm-java-common-util</artifactId>
-      <version>1.0-RELEASE</version>
+      <version>${version}</version>
     </dependency>
 
 ## License

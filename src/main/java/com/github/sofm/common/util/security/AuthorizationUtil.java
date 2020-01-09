@@ -1,11 +1,12 @@
 package com.github.sofm.common.util.security;
 
 import java.nio.charset.StandardCharsets;
-import lombok.NoArgsConstructor;
 import org.apache.commons.codec.binary.Base64;
 
-@NoArgsConstructor
 public class AuthorizationUtil {
+
+  private AuthorizationUtil() {
+  }
 
   public static String generateBasicAuthorization(String username, String password) {
     String auth = username + ":" + password;

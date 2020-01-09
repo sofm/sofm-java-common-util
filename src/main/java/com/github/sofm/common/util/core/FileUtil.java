@@ -1,4 +1,4 @@
-package com.github.sofm.common.util;
+package com.github.sofm.common.util.core;
 
 import static org.zeroturnaround.zip.commons.FileUtilsV2_2.deleteDirectory;
 
@@ -16,13 +16,14 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.zeroturnaround.zip.ZipUtil;
 
-@NoArgsConstructor
 @Slf4j
 public class FileUtil {
+
+  private FileUtil() {
+  }
 
   public static void changeModInLinux(String path) {
     changeModInLinux(path, "777");
@@ -73,8 +74,8 @@ public class FileUtil {
       Path path = Paths.get(filepath);
       Files.createFile(path, attrs);
       Files.write(path, bytes);
-    } catch (IOException var4) {
-      log.error("(createFile)ex: {}", ExceptionUtil.getFullStackTrace(var4));
+    } catch (IOException ex) {
+      log.error("(createFile)ex: {}", ExceptionUtil.getFullStackTrace(ex));
     }
   }
 

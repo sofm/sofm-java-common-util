@@ -1,9 +1,9 @@
-package com.github.sofm.common.util;
+package com.github.sofm.common.util.core;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 public class MobileUtil {
+
+  private MobileUtil() {
+  }
 
   public static String formatThailandMobileNumber(String input) {
     return formatMobileNumber(input, "66");

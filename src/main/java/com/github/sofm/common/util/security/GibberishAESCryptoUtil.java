@@ -9,13 +9,9 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.Validate;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-@NoArgsConstructor
-@Slf4j
 public class GibberishAESCryptoUtil {
 
   private static final String CIPHER_ALG = "PBEWITHMD5AND256BITAES-CBC-OPENSSL";
@@ -26,8 +22,10 @@ public class GibberishAESCryptoUtil {
 
   private Random rand = new Random();
 
+  private GibberishAESCryptoUtil() {
+  }
+
   public String encrypt(String plainText, char[] password) throws Exception {
-    log.debug("(encrypt)plainText: {}", plainText);
     byte[] salt = new byte[8];
     rand.nextBytes(salt);
     Cipher cipher = createCipher(Cipher.ENCRYPT_MODE, salt, password);
@@ -40,7 +38,6 @@ public class GibberishAESCryptoUtil {
   }
 
   public String decrypt(String cipherText, char[] password) throws Exception {
-    log.debug("(decrypt)cipherText: {}", cipherText);
     byte[] input = Base64.getDecoder().decode(cipherText);
     String prefixText = new String(input, 0, 8, StandardCharsets.UTF_8);
     Validate.isTrue(prefixText.equals(PREFIX), "Invalid prefix: ", prefixText);
@@ -52,7 +49,6 @@ public class GibberishAESCryptoUtil {
   }
 
   private Cipher createCipher(int cipherMode, byte[] salt, char[] password) throws Exception {
-    log.debug("(createCipher)cipherMode: {}", cipherMode);
     PBEKeySpec pbeSpec = new PBEKeySpec(password);
     SecretKeyFactory keyFact = SecretKeyFactory.getInstance(CIPHER_ALG, CIPHER_PROVIDER);
     PBEParameterSpec defParams = new PBEParameterSpec(salt, 0);

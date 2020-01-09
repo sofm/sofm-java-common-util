@@ -1,16 +1,17 @@
 package com.github.sofm.common.util.cmd;
 
-import com.github.sofm.common.util.ExceptionUtil;
+import com.github.sofm.common.util.core.ExceptionUtil;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@NoArgsConstructor
 @Slf4j
 public class ShellCommandUtil {
+
+  private ShellCommandUtil(){
+  }
 
   public static CommandResult runCommand(String command) {
     CommandResult commandResult = new CommandResult();

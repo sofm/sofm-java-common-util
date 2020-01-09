@@ -1,4 +1,4 @@
-package com.github.sofm.common.util;
+package com.github.sofm.common.util.core;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@NoArgsConstructor
 @Slf4j
 public class DateUtil {
 
   private static final String DEFAULT_SIMPLE_DATE_FORMAT = "yyyyMMdd";
+
+  private DateUtil() {
+  }
 
   public static Date toDate(String date) {
     return toDate(date, DEFAULT_SIMPLE_DATE_FORMAT);

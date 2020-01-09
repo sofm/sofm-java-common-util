@@ -1,11 +1,11 @@
-package com.github.sofm.common.util;
+package com.github.sofm.common.util.core;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 public class SystemUtil {
 
   private static final String OS = System.getProperty("os.name").toLowerCase();
+
+  private SystemUtil() {
+  }
 
   public static boolean isWindows() {
     return OS.contains("win");

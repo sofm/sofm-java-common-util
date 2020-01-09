@@ -1,4 +1,4 @@
-package com.github.sofm.common.util;
+package com.github.sofm.common.util.core;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
