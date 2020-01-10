@@ -79,6 +79,44 @@ public class FileUtil {
     }
   }
 
+  public static String searchStringInFile(String filePath, String keyword) {
+    String result = "";
+
+    try (Stream<String> lines = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
+      for (String line : (Iterable<String>) lines::iterator) {
+        if (line.contains(keyword)) {
+          return line;
+        }
+      }
+    } catch (Exception ex) {
+      log.error("(searchStringInFile)ex:  {}", ExceptionUtil.getFullStackTrace(ex));
+    }
+
+    return result;
+  }
+
+  public static List<String> toList(String filePath) {
+    List<String> result = new ArrayList<>();
+
+    try (Stream<String> lines = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
+      for (String line : (Iterable<String>) lines::iterator) {
+        result.add(line);
+      }
+    } catch (Exception ex) {
+      log.error("(toList)ex: {}", ExceptionUtil.getFullStackTrace(ex));
+    }
+
+    return result;
+  }
+
+  public static void unzipFile(String zipFilepath, FileAttribute<?>... attrs) throws IOException {
+    String parent = getParent(zipFilepath);
+    String zipFolder = parent + "/" + getFilenameWithoutExtension(zipFilepath) + "/";
+    deleteDirectory(new File(zipFolder));
+    Files.createDirectories(Paths.get(zipFolder), attrs);
+    ZipUtil.unpack(new File(zipFilepath), new File(zipFolder));
+  }
+
   public static String getExtension(String uri) {
     return uri.substring(uri.lastIndexOf('.'));
   }
@@ -117,44 +155,6 @@ public class FileUtil {
     Path file = Paths.get(filepath);
     Path parent = file.getParent();
     return parent == null ? null : parent.toString();
-  }
-
-  public static String searchStringInFile(String filePath, String keyword) {
-    String result = "";
-
-    try (Stream<String> lines = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
-      for (String line : (Iterable<String>) lines::iterator) {
-        if (line.contains(keyword)) {
-          return line;
-        }
-      }
-    } catch (Exception ex) {
-      log.error("(searchStringInFile)ex:  {}", ExceptionUtil.getFullStackTrace(ex));
-    }
-
-    return result;
-  }
-
-  public static List<String> toList(String filePath) {
-    List<String> result = new ArrayList<>();
-
-    try (Stream<String> lines = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
-      for (String line : (Iterable<String>) lines::iterator) {
-        result.add(line);
-      }
-    } catch (Exception ex) {
-      log.error("(toList)ex: {}", ExceptionUtil.getFullStackTrace(ex));
-    }
-
-    return result;
-  }
-
-  public static void unzipFile(String zipFilepath, FileAttribute<?>... attrs) throws IOException {
-    String parent = getParent(zipFilepath);
-    String zipFolder = parent + "/" + getFilenameWithoutExtension(zipFilepath) + "/";
-    deleteDirectory(new File(zipFolder));
-    Files.createDirectories(Paths.get(zipFolder), attrs);
-    ZipUtil.unpack(new File(zipFilepath), new File(zipFolder));
   }
 
   public static FileAttribute<Set<PosixFilePermission>> getFullPermissions() {

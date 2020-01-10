@@ -5,10 +5,6 @@ public class MobileUtil {
   private MobileUtil() {
   }
 
-  public static String formatThailandMobileNumber(String input) {
-    return formatMobileNumber(input, "66");
-  }
-
   public static String formatVietnamMobileNumber(String input) {
     return formatMobileNumber(input, "84");
   }

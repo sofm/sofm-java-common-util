@@ -25,23 +25,22 @@ public class StringUtil {
   public static boolean isValid(String input) {
     if (input == null) {
       return false;
+    } else {
+      return !input.trim().isEmpty();
     }
-
-    return !input.trim().isEmpty();
   }
 
   public static boolean isHtml(final String htmlString) {
     if (!htmlString.contains("<") || !htmlString.contains(">")) {
       return false;
+    } else {
+      try {
+        Jsoup.parse(htmlString);
+        return true;
+      } catch (Exception e) {
+        return false;
+      }
     }
-
-    try {
-      Jsoup.parse(htmlString);
-    } catch (Exception e) {
-      return false;
-    }
-
-    return true;
   }
 
   public static boolean isJson(String input) {
@@ -94,23 +93,23 @@ public class StringUtil {
     }
   }
 
-  public static String removeAccent(String s) {
-    StringBuilder sb = new StringBuilder(s);
-    for (int i = 0; i < sb.length(); i++) {
-      sb.setCharAt(i, removeAccent(sb.charAt(i)));
+  public static String removeAccent(String input) {
+    StringBuilder stringBuilder = new StringBuilder(input);
+    for (int i = 0; i < stringBuilder.length(); i++) {
+      stringBuilder.setCharAt(i, removeAccent(stringBuilder.charAt(i)));
     }
 
-    return sb.toString();
+    return stringBuilder.toString();
   }
 
-  private static char removeAccent(char ch) {
+  private static char removeAccent(char c) {
     String special = "àÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰýÝỹỸỳỲỷỶỵỴ :+\\<>\"*,!?%$=@#~[]`|^'.;＆&";
     String replace = "aAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAdDeEeEeEeEeEeEeEeEeEeEeEiIiIiIiIiIoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOuUuUuUuUuUuUuUuUuUuUuUyYyYyYyYyY----\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0----";
-    int index = special.indexOf(ch);
+    int index = special.indexOf(c);
     if (index >= 0) {
-      ch = replace.charAt(index);
+      c = replace.charAt(index);
     }
 
-    return ch;
+    return c;
   }
 }

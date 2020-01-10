@@ -16,6 +16,18 @@ public class DateUtil {
   private DateUtil() {
   }
 
+  public static Date change(Date date, boolean increase) {
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(date);
+    if (increase) {
+      calendar.add(Calendar.DAY_OF_MONTH, 1);
+    } else {
+      calendar.add(Calendar.DAY_OF_MONTH, -1);
+    }
+
+    return calendar.getTime();
+  }
+
   public static Date toDate(String date) {
     return toDate(date, DEFAULT_SIMPLE_DATE_FORMAT);
   }
@@ -53,18 +65,6 @@ public class DateUtil {
         + "','until':'"
         + toString(until, simpleDateFormat)
         + "'}";
-  }
-
-  public static Date change(Date date, boolean increase) {
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(date);
-    if (increase) {
-      calendar.add(Calendar.DAY_OF_MONTH, 1);
-    } else {
-      calendar.add(Calendar.DAY_OF_MONTH, -1);
-    }
-
-    return calendar.getTime();
   }
 
   public static List<String> toList(Date from, Date until, String simpleDateFormat) {
